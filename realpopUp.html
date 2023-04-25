@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      body {
+        margin: auto;
+        width: 200px; 
+        padding: 50px;
+        font-family: 'Lexend Deca', sans-serif; 
+        color: #2E475D;    
+      }
+
+      .formPopup {
+        display: none;
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        border: 5px solid #999999;
+      }
+      .formContainer {
+        max-width: 300px;
+        padding: 20px;
+        background-color: #fff;
+      }
+      #popup1 {
+        -webkit-box-shadow:  0px 0px 0px 9999px rgba(0, 0, 0, 0.5);
+        box-shadow:  0px 0px 0px 9999px rgba(0, 0, 0, 0.5);
+      }
+      /* .overlay { position: absolute; top: 0; left: 0; height: 100%; width: 100% } */
+    </style>
+  </head>
+  <body>
+        <h2>EVENT REGISTRATION</h2>
+
+        <form id="myForm" action="check.php" method="POST">
+          <label for="fname">First name:</label><br>
+          <input type="text" id="fname" name="fname" placeholder="Name" required><br>
+          <label for="email">Email:</label><br>
+          <input type="email" id="email" name="email" placeholder="Email address" required><br>
+          <label for="phone">Phone:</label><br>
+          <input type="tel" id="phone" name="text" pattern="(?=.*\d).{10,}" placeholder="+7XXXXXXXX" required><br><br>
+          <input type="checkbox" id="checkbox" name="checkbox">
+          <label for="checkbox"> "I agree to the processing of the personal data" <span style="color:#FF0000">*</span> </label><br><br>
+          <input type="submit" value="Submit here" id="submit" onclick="myFunction()" ondblclick="closeForm()">
+        </form> 
+        <!-- <div class="overlay"></div> -->
+        <div class="loginPopup">
+          <div class="formPopup" id="popupForm">
+            <form class="formContainer" id="popup1">
+              <h2>Thanks! Our manager will contact you soon!</h2>
+            </form>
+          </div>
+        </div>
+  </body>
+
+  <script>
+  document.getElementById("myForm").addEventListener("submit", function(event){
+    event.preventDefault()
+  });
+
+
+  function myFunction2() {
+    alert("Submissions is success");
+  }
+
+  function myFunction() {
+	const name = document.getElementById('fname')
+	const eml = document.getElementById('email')
+	const ph = document.getElementById('phone')
+  myForm.addEventListener('submit', (e) =>{
+      var isValid = true;
+
+ 			e.preventDefault();
+
+      if(name.value == null || name.value == ''){
+          isValid == false;
+      }
+      if (name.value > 0){
+          isValid == false;
+      }
+
+      if(eml.value == null || eml.value == ''){
+          isValid == false;
+      }
+      
+      if(ph.value == null || ph.value == ''){
+          isValid == false;
+      }
+			const cb = document.querySelector('#checkbox');
+      if (cb.checked == false) {
+      	alert("Please agree to the terms before submit!");
+        e.stopImmediatePropagation();
+      }
+      if (isValid == true && cb.checked == true){
+      	 openForm();
+         e.stopImmediatePropagation();
+          setTimeout(function() { closeForm();}, 5000)
+      }
+
+    })
+}
+
+  function openForm() {
+    document.getElementById("popupForm").style.display = "block";
+  }
+  function closeForm() {
+    document.getElementById("popupForm").style.display = "none";
+  }
+
+  function myFunction3() {
+    var popup = document.getElementById("myPopup");
+    popup.classList.toggle("show");
+  }
+
+  </script>
+</html>
